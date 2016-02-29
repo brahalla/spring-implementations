@@ -18,12 +18,6 @@ import com.querydsl.core.types.dsl.StringPath;
 @RepositoryRestResource(collectionResourceRel = "photos", path = "photos")
 public interface PhotoRepository extends PagingAndSortingRepository<Photo, Long>, QueryDslPredicateExecutor<Photo>, QuerydslBinderCustomizer<QPhoto> {
 
-  @RestResource(path = "byName", rel = "byName")
-  Page<Photo> findByNameContainingIgnoreCase(@Param("name") String name, Pageable p);
-
-  @RestResource(path = "byAlbum", rel = "byAlbum")
-  Page<Photo> findByAlbumId(@Param("id") Long albumId, Pageable p);
-
   @Override
   default void customize(QuerydslBindings bindings, QPhoto photo) {
 		bindings.bind(String.class).first((StringPath path, String value) -> path.containsIgnoreCase(value));

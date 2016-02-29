@@ -18,9 +18,6 @@ import com.querydsl.core.types.dsl.StringPath;
 @RepositoryRestResource(collectionResourceRel = "albums", path = "albums")
 public interface AlbumRepository extends PagingAndSortingRepository<Album, Long>, QueryDslPredicateExecutor<Album>, QuerydslBinderCustomizer<QAlbum> {
 
-  @RestResource(path = "byName", rel = "byName")
-  Page<Album> findByNameContainingIgnoreCase(@Param("name") String name, Pageable p);
-
   @Override
   default void customize(QuerydslBindings bindings, QAlbum album) {
 		bindings.bind(String.class).first((StringPath path, String value) -> path.containsIgnoreCase(value));
