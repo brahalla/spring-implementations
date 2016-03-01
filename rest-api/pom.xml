@@ -36,11 +36,6 @@
     </dependency>
     <dependency>
       <groupId>com.querydsl</groupId>
-      <artifactId>querydsl-core</artifactId>
-      <version>${querydsl.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>com.querydsl</groupId>
       <artifactId>querydsl-jpa</artifactId>
       <version>${querydsl.version}</version>
     </dependency>
@@ -87,7 +82,7 @@
             <configuration>
               <outputDirectory>target/generated-sources/annotations</outputDirectory>
               <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
-              <logOnlyOnError>false</logOnlyOnError>
+              <logOnlyOnError>true</logOnlyOnError>
             </configuration>
           </execution>
         </executions>
