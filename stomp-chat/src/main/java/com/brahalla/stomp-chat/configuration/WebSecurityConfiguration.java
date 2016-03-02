@@ -19,7 +19,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     auth
       .inMemoryAuthentication()
         .withUser("user").password("password").roles("USER").and()
-        .withUser("admin").password("admin").roles("USER","ADMIN");
+        .withUser("admin").password("password").roles("USER","ADMIN");
   }
 
   @Bean
@@ -31,8 +31,15 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
   @Override
   protected void configure(HttpSecurity http) throws Exception {
     http
+      .formLogin()
+        .defaultSuccessUrl("/")
+        .loginPage("/login").permitAll()
+        .and()
+      .logout()
+        .permitAll()
+        .and()
       .authorizeRequests()
-        .antMatchers("/assets/**").permitAll()
+        .antMatchers("/lib/**").permitAll()
         .anyRequest().authenticated();
   }
 

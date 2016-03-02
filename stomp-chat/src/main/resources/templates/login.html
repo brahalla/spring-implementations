@@ -1,0 +1,36 @@
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:tiles="http://www.thymeleaf.org">
+  <head>
+    <title>Sign in &middot; Chatter Chat Room Sign in</title>
+    <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css" />
+
+    <script type="text/javascript" src="lib/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="lib/jquery/jquery-1.12.1.min.js"></script>
+  </head>
+
+  <body>
+    <div class="container">
+      <div class="alert alert-danger" style="display:none">
+        Invalid username/password.
+      </div>
+
+      <form class="form-signin" method="post" th:action="@{/login}">
+        <h3 class="muted form-signin-heading">Please sign in</h3>
+        <input type="text" class="form-control" placeholder="User name" name="username" />
+        <input type="password" class="form-control input-block-level" placeholder="Password" name="password" />
+        <button class="btn btn-primary" type="submit">Sign in</button>
+        <hr />
+        <p class="text-info"><small>
+          Log in as <strong>user/admin</strong> with password <strong>password</strong>.<br />
+          See <code>WebSecurityConfiguration.java</code></small></p>
+      </form>
+    </div>
+
+    <script type="text/javascript">
+      var query = window.location.search;
+      if(query.indexOf('error') != -1) {
+        $('.alert').show();
+      }
+    </script>
+
+  </body>
+</html>
