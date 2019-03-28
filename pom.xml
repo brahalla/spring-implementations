@@ -16,6 +16,7 @@
   </parent>
 
   <modules>
+    <module>multi-tenant</module>
     <module>rest-api</module>
     <module>stomp-chat</module>
   </modules>
