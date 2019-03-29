@@ -11,11 +11,15 @@ import org.hibernate.engine.jdbc.connections.spi.AbstractMultiTenantConnectionPr
 import org.hibernate.engine.jdbc.connections.spi.ConnectionProvider;
 import org.hibernate.engine.jdbc.connections.spi.MultiTenantConnectionProvider;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-//@Component
+@Component
 public class SeparateSchemaMultiTenantConnectionProvider implements MultiTenantConnectionProvider {
+  private static final Logger logger = LoggerFactory.getLogger(SeparateSchemaMultiTenantConnectionProvider.class);
 
   @Autowired
   private DataSource dataSource;
@@ -32,6 +36,7 @@ public class SeparateSchemaMultiTenantConnectionProvider implements MultiTenantC
 
   @Override
   public Connection getConnection(String tenantIdentifier) throws SQLException {
+    logger.info(String.format("Getting connection for tenant: %s", tenantIdentifier));
     Connection connection = this.getAnyConnection();
     connection.createStatement().execute(String.format("USE %s;", tenantIdentifier));
     return connection;
